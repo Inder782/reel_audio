@@ -12,7 +12,7 @@ const Urls = () => {
         required
         placeholder="Paste the Url here"
       />
-      <Button className="mt-10">Download and Give me Audio</Button>
+      <Button className="mt-10">Download Reel</Button>
     </div>
   );
 };
