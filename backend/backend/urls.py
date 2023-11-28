@@ -19,6 +19,7 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("hi",include("converter.urls")),
+    path ('audio/',include("audio.urls"))
+    
 ]
 
