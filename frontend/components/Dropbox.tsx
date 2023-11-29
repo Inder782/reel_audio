@@ -14,7 +14,7 @@ const Dropbox = () => {
   const uploadtoserver = async () => {
     const video = new FormData();
     video.append("video", file!);
-    const response = await fetch("http://127.0.0.1:8000/audio/get_audio/", {
+    const response = await fetch("http://127.0.0.1:8000/api/", {
       method: "POST",
       body: video,
     });
