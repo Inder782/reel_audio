@@ -1,14 +1,21 @@
-from django.shortcuts import render
-from rest_framework.decorators import api_view
+from django.views.decorators.csrf import csrf_exempt
 from .models import Video
 from rest_framework import status
 from rest_framework.response import Response
-from django.http import HttpResponse
+from .serializer import VideoSerializer
+from rest_framework.decorators import api_view
+
 # Create your views here.
 
-@api_view(['POST'])
+@csrf_exempt
+@api_view(["POST"])
 def Videohandle(request):
-    if request.method=="POST":
-        Video.save()
-    return Response(status.is_success)
+    print(request.data)
+    serializer=VideoSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(status=status.HTTP_200_OK)
+    else:
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
