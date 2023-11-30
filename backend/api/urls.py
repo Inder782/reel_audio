@@ -6,6 +6,6 @@ from . import views
 
 urlpatterns = [
 
-    path ('',views.Videohandle)
+    path ('',views.Videohandle,name="Video")
     
 ]

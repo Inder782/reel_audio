@@ -29,6 +29,10 @@ DEBUG = True
 ALLOWED_HOSTS = ["127.0.0.1"]
 CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
 CSRF_ALLOWED_ORIGINS = ["http://localhost:3000"]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
+DATA_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024  # 10 MB
 
 
 # Application definition
@@ -124,6 +128,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ],
+    # other DRF settings...
+}
 
 STATIC_URL = 'static/'
 

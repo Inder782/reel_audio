@@ -12,13 +12,14 @@ const Dropbox = () => {
     }
   };
   const uploadtoserver = async () => {
-    const video = new FormData();
-    video.append("video", file!);
-    const response = await fetch("http://127.0.0.1:8000/audio/get_audio/", {
-      method: "POST",
-      body: video,
-    });
-    console.log(response);
+    if (file) {
+      const formdata = new FormData();
+      formdata.append("video_file", file);
+      const response = await fetch("http://127.0.0.1:8000/api/", {
+        method: "POST",
+        body: formdata,
+      });
+    }
   };
 
   return (
