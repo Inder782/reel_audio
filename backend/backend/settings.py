@@ -32,7 +32,7 @@ CSRF_ALLOWED_ORIGINS = ["http://localhost:3000"]
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
-DATA_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024  # 10 MB
+DATA_UPLOAD_MAX_MEMORY_SIZE = 20 * 1024 * 1024  # 10 MB
 
 
 # Application definition
