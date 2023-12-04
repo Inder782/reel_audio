@@ -14,6 +14,27 @@ def Videohandle(request):
     name_data = str(request.FILES.get("video_file"))
     serializer = VideoSerializer(data=request.data)
 
+    ## define the paths and list them
+    video_folder_path="output/audio"
+    audio_folder_path="output/vid"
+    video_files=os.listdir(video_folder_path)
+    audio_files=os.listdir(audio_folder_path)
+
+    #deleted the audio files
+    for file_name in audio_files:
+        file_path=os.path.join(audio_folder_path,file_name)
+        if os.path.isfile(file_path):
+            os.remove(file_path)
+            print("audio files deleted")
+
+    #deleted the video files
+    for video_filename in video_files:
+        file_path=os.path.join(video_folder_path,video_filename)
+        if os.path.isfile(file_path):
+            os.remove(file_path)
+            print("Video files cleaned")
+
+
     if serializer.is_valid():
         # save the video
         serializer.save()

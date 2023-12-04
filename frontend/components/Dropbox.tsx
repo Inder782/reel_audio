@@ -1,10 +1,11 @@
 "use client";
 import React, { useState } from "react";
 import { Button } from "./ui/button";
+import { useToast } from "./ui/use-toast";
 
 const Dropbox = () => {
-  const [file, setfile] = useState(null);
-
+  const [file, setfile] = useState<File | null>(null);
+  const [audio, setaudio] = useState<Blob | null>(null);
   const uploadtoclient = (event: any) => {
     if (event.target.files && event.target.files[0]) {
       const i = event.target.files[0];
@@ -19,23 +20,32 @@ const Dropbox = () => {
         method: "POST",
         body: formdata,
       });
+      if (response.ok) {
+        const blob = await response.blob();
+        setaudio(blob);
+      }
     }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-12">
+    <div className="fixed flex flex-col mt-32 max-sm:flex max-sm:flex-col">
       <input
         type="file"
         id="video"
         name="video"
         accept="video/*"
-        className="bg-black bg-clip-text "
+        className="flex mt-32 "
         onChange={uploadtoclient}
         multiple={true}
       />
-      <Button className="mt-10" onClick={uploadtoserver}>
+      <Button className="mt-10 w-[280px]" onClick={uploadtoserver}>
         Get Audio
       </Button>
+      {audio && (
+        <a href={URL.createObjectURL(audio)} download={file?.name || "audio"}>
+          <Button className="w-[280px] mt-10">Download Audio</Button>
+        </a>
+      )}
     </div>
   );
 };
