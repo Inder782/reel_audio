@@ -28,7 +28,7 @@ export default function Component() {
             </span>{" "}
             on Ideas
           </p>
-          <p className="text-5xl font-bold  bg-clip-text bg-gradient-to-r from-black to-black text-transparent max-sm:hidden mt-10">
+          <p className="text-5xl font-bold  bg-clip-text bg-gradient-to-r from-black to-black text-transparent mt-10">
             Upload the file and get started
           </p>
           <Dropbox />
