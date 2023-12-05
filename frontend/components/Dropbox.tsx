@@ -1,11 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import { Button } from "./ui/button";
-import { useToast } from "./ui/use-toast";
 
 const Dropbox = () => {
   const [file, setfile] = useState<File | null>(null);
   const [audio, setaudio] = useState<Blob | null>(null);
+
+  const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL;
   const uploadtoclient = (event: any) => {
     if (event.target.files && event.target.files[0]) {
       const i = event.target.files[0];
@@ -16,13 +17,22 @@ const Dropbox = () => {
     if (file) {
       const formdata = new FormData();
       formdata.append("video_file", file);
-      const response = await fetch("http://127.0.0.1:8000/api/", {
-        method: "POST",
-        body: formdata,
-      });
-      if (response.ok) {
-        const blob = await response.blob();
-        setaudio(blob);
+      if (backend_url) {
+        try {
+          const response = await fetch(backend_url, {
+            method: "POST",
+            body: formdata,
+          });
+          if (!response.ok) {
+            console.log("oops network here");
+          } else {
+            const blob = await response.blob();
+            setaudio(blob);
+          }
+        } catch (error) {
+          console.clear();
+          console.log("Something went wrong");
+        }
       }
     }
   };
